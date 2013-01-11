@@ -1,0 +1,11 @@
+span.collapsible-counter{float: right;font-size: 11px;padding: 2px 5px;}
+.content-player fieldset label{border-radius: 0px;}
+.content-player fieldset label.first{border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.content-player fieldset label.last{border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border-bottom:1px solid #ccc}
+.Male{color:blue;}
+.Female{color: red;}
+a.counters{width:30px;height:30px;margin:0;top:-1px;}
+span.counters{padding:5px 10px}
+.counters span.ui-icon{left:6px;}
+.ui-btn-icon-left span.ui-btn-inner{height: 12px;}
+.ui-btn-icon-left.counters > .ui-btn-inner > .ui-icon{margin-top:-11px;}

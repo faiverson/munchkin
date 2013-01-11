@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+	<meta name="author" content="Fabian Torres">
+	<title>Munchkin</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css">
+    <link rel="stylesheet" href="css/index.css">
+	<script data-main="js/main" src="js/libs/require.v2.1.0.min.js"></script>
+</head>
+<body>
+    <div data-role="page" id="main">
+        <div data-role="header" data-position="fixed">
+            <h1>Munchkin</h1>
+        </div>  
+        <div data-role="content" id="content">
+            <div id="players-list" data-role="collapsible-set" data-collapsed="true" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u" data-iconpos="right">
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h4><a href="#newPlayer" id="addPlayer" data-role="button" data-icon="plus">Add Player</a></h4>
+        </div>
+    </div>
+    <div id="error" data-overlay-theme="c">
+        <div data-role="header" data-position="fixed">
+            <h1>Error</h1>
+        </div>
+        <div data-role="content" id="error-message"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<div data-role="collapsible" id="player-<%= id %>">
+    <h3><span><%= name %></span>
+        <span class="ui-li-count ui-btn-up-b ui-btn-corner-all collapsible-counter total-list"><%= total %></span>
+        <span class="collapsible-counter">Total</span>
+        <span class="ui-li-count ui-btn-up-e ui-btn-corner-all collapsible-counter bonus-list"><%= bonus + extra %></span>
+        <span class="collapsible-counter">Bonus</span>
+        <span class="ui-li-count ui-btn-up-a ui-btn-corner-all collapsible-counter level-list"><%= level %></span>
+        <span class="collapsible-counter">Level</span><a href="#" data-role="button" data-icon="plus"  data-mini="true"></a>
+    </h3>
+    <div class="status"><b><span class="<%= gender %>"><%= name %> Total Power: </span><span class="total"><%= total %></span></b>
+    </div>
+    <div class="content-player">
+        <b>Level: </b>
+        <a href="#" data-role="button" data-icon="plus" data-inline="true" class="counters level"></a>
+        <span class="ui-li-count ui-btn-up-c ui-btn-corner-all ui-shadow counters level"><%= level %></span>
+        <a href="#" data-role="button" data-icon="minus" data-inline="true" class="counters level"></a>        
+        <b>Bonus: </b>
+        <a href="#" data-role="button" data-icon="plus" data-inline="true" class="counters bonus"></a>
+        <span class="ui-li-count ui-btn-up-c ui-btn-corner-all ui-shadow counters bonus"><%= bonus %></span>
+        <a href="#" data-role="button" data-icon="minus" data-inline="true" class="counters bonus"></a>
+        <b>Extra for race/class: </b>
+        <a href="#" data-role="button" data-icon="plus" data-inline="true" class="counters extra"></a>
+        <span class="ui-li-count ui-btn-up-c ui-btn-corner-all ui-shadow counters extra"><%= extra %></span>
+        <a href="#" data-role="button" data-icon="minus" data-inline="true" class="counters extra"></a>
+        <div data-role="fieldcontain">
+            <label for="gender">Gender:</label>
+            <select name="gender" class="gender" data-role="slider">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup" data-mini="true">
+            <legend>Class:</legend>
+            <label for="warriors-<%= id %>" class="first"><input type="checkbox" name="Warriors" class="classes" id="warriors-<%= id %>" />Warriors</label>
+            <label for="thieves-<%= id %>"><input type="checkbox" name="Thieves" class="classes" id="thieves-<%= id %>" />Thieves</label>
+            <label for="wizards-<%= id %>" class="last"><input type="checkbox" name="Wizards" class="classes" id="wizards-<%= id %>" />Wizards</label>
+        </fieldset>
+        </div>
+        <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup" data-mini="true">
+            <legend>Race:</legend>
+            <label for="dwarves-<%= id %>"><input type="checkbox" name="Dwarves" class="races" id="dwarves-<%= id %>" />Dwarves</label>
+            <label for="halflings-<%= id %>"><input type="checkbox" name="Halflings" class="races" id="halflings-<%= id %>" />Halflings</label>
+            <label for="elves-<%= id %>" class="last"><input type="checkbox" name="Elves" class="races" id="elves-<%= id %>" />Elves</label>
+        </fieldset>
+        </div>
+        <a href="fight/<%= id %>" data-role="button" class="fight" data-icon="star">Fight with a Monster</a>
+    </div>    
+</div>
