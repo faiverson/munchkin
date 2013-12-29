@@ -1,0 +1,179 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h4 class="main-title">Players List</h4>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default" ng-repeat="player in players">
+        {{ setIndex($index) }}
+        <div class="panel-heading player-{{ $index }}">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $index }}">
+              <b>{{ player.name}}</b>
+              <div class="pull-right">
+                  <span>Level: </span><span class="badge level">{{ player.level}}</span>
+                  <span>Bonus: </span><span class="badge bonus">{{ player.bonus}}</span>
+                  <span>Total: </span> <span class="badge total">{{ player.total}}</span>
+              </div>
+            </a>
+          </h4>
+        </div>
+        <div id="collapse{{ $index }}" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <div class="pull-right arrows">                  
+                  </div>
+                  <span class="badge total" id="total-{{ $index }}">{{ player.total}}</span>
+                  Total
+                </li>
+                <li class="list-group-item">
+                  <div class="pull-right arrows">                  
+                    <span class="glyphicon glyphicon-chevron-up" ng-click="changePoints($event, this)"></span>
+                    <span class="glyphicon glyphicon-chevron-down" ng-click="changePoints($event, this)"></span>
+                  </div>
+                  <span class="badge bonus">{{ player.bonus}}</span>
+                  Bonus
+                </li>
+                <li class="list-group-item">
+                  <div class="pull-right arrows">                  
+                    <span class="glyphicon glyphicon-chevron-up" ng-click="changePoints($event, this)"></span>
+                    <span class="glyphicon glyphicon-chevron-down" ng-click="changePoints($event, this)"></span>
+                  </div>
+                  <span class="badge level">{{ player.level}}</span>
+                  Level
+                </li>
+              </ul>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default" ng-gender ng-index="{{ $index }}">Male</button>
+                <button type="button" class="btn btn-default" ng-gender ng-index="{{ $index }}">Female</button>
+            </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <h4>Races</h4>
+              <ul class="nav nav-pills nav-stacked">
+                <li class="{{ player.race.human }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Human</a></li>
+                <li class="{{ player.race.elves }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Elves</a></li>
+                <li class="{{ player.race.dwarves }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Dwarves</a></li>
+                <li class="{{ player.race.halflings }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Halflings</a></li>
+                <li class="{{ player.race.orcs }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Orcs</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <h4>Classes</h4>
+              <ul class="nav nav-pills nav-stacked">
+                <li class="{{ player.class.cleric }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Cleric</a></li>
+                <li class="{{ player.class.warrior }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Warrior</a></li>
+                <li class="{{ player.class.thief }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Thief</a></li>
+                <li class="{{ player.class.wizard }}" ng-click="changeState($event, this);"><a href="javascript:void(0)">Wizard</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <h4>Items</h4>
+              <ul class="nav nav-pills nav-stacked">
+                <li ng-click="changeState($event, $parent);" ng-repeat="(item, val) in player.items">
+                  <span id="{{item}}-{{ $parent.$index }}" class="glyphicon glyphicon-{{ checkItem(this, item) }}">
+                    <a href="javascript:void(0)">{{ getItemName(item) }}</a>
+                  </span>
+                </li>
+              </ul>
+              <h4>Actions</h4>
+              <a data-toggle="modal" ng-href="#fight-{{ $index }}" class="btn btn-info">Fight!</a>
+
+              <!-- Modal Fight -->
+              <div class="modal fade" id="fight-{{ $index }}" role="dialog" aria-labelledby="fightPlayer" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form class="form-inline" role="form">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <div class="row">
+                          <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                            <h4 class="modal-title">Fight!</h4>
+                          </div>
+                          <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
+                            <h5>{{ player.name}} <b>{{ getPlayer(player) }}</b> - <b>{{ getMonster() }} </b> Monster</h5>
+                          </div>
+                          <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4"></div>
+                        </div>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <div class="form-group">
+                                  <label for="user-total" class="control-label col-lg-9">{{ player.name }} </label>
+                                  <div class="col-lg-3">
+                                    <input type="text" class="form-control input-sm" id="user-total" placeholder="{{ player.total }}" disabled />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label for="user-battle" class="control-label col-lg-9">In battle: </label>
+                                  <div class="col-lg-3">
+                                    <input type="text" class="form-control input-sm" id="user-battle" placeholder="0" ng-model="player.battle" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-lg-5">Friend's help: </div>
+                                <div class="col-lg-7">
+                                  <select class="form-control input-sm" ng-options="p.name for p in players" ng-model="friend" ng-change="setFriend()">
+                                    <option value="">I'm an alpha. I fight alone!</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <div class="form-group">
+                                  <label for="monster" class="control-label col-lg-9">Monster: </label>
+                                  <div class="col-lg-3">
+                                    <input type="text" class="form-control input-sm" id="monster" placeholder="{{ monster.level }}" ng-model="monster.level" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label for="monster-battle" class="control-label col-lg-9">In battle: </label>
+                                  <div class="col-lg-3">
+                                    <input type="text" class="form-control input-sm" id="monster-battle" placeholder="0" ng-model="monster.battle" />
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-lg-5">Monster's help: </div>
+                                <div class="col-lg-7">
+                                  <select class="form-control input-sm" ng-model="enemy" ng-options="player.name for player in players" ng-change="setEnemy()">
+                                    <option value="">He's alone!</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>                          
+                      </div>
+                      <div class="modal-footer">
+                        <h4 class="pull-left" ng-class="whoIsWining(player) != 'The Monster' ? 'green' : 'red'">{{ whoIsWining(player) }} is kicking asses!</h4>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="reset($index)">Defeated</button>
+                        <button type="button" class="btn btn-success" ng-click="victory($event, this)">Victory!</button>
+                      </div>
+                    </form>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+              <a data-toggle="modal" ng-href="#remove-player-{{ $index }}" class="btn btn-danger">Remove</a>
+              <!-- Modal -->
+              <div class="modal fade" id="remove-player-{{ $index }}" role="dialog" aria-labelledby="removePlayer" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">You will proceed to delete {{ player.name}} from the game.<br />
+                        Are you sure?</h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" ng-click="removePlayer(this)">Remove anyway</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>

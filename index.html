@@ -1,33 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" id="ng-app"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" data-framework="angularjs"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gamecard, Munchkin, Counter, Card game">
+  <base href="/" />
 	<meta name="author" content="Fabian Torres">
-	<title>Munchkin</title>
-    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css">
-    <link rel="stylesheet" href="css/index.css">
-	<script data-main="js/main" src="js/libs/require.v2.1.0.min.js"></script>
+	<title>Munchkin - Cardgame counter</title>
+	<meta name="viewportina" content="height=device-height">
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120-precomposed.png">
+    <!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+    <!--[if IE]>
+    <link rel="shortcut icon" href="favicon.ico">
+    <![endif]-->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">	
 </head>
-<body>
-    <div data-role="page" id="main">
-        <div data-role="header" data-position="fixed">
-            <h1>Munchkin</h1>
-        </div>  
-        <div data-role="content" id="content">
-            <div id="players-list" data-role="collapsible-set" data-collapsed="true" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u" data-iconpos="right">
+<body ng-controller="starting">
+	<div id="wrap-app">
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="css/images/home/munchkin-title.jpg" /></a>
+          </div>
+        </div>
+      </div>
+      <!-- Begin page content -->
+      <div class="clearfix"></div>
+      <div class="container" ng-view></div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#newPlayer">
+            <span class="glyphicon glyphicon-plus-sign"></span> Add Player
+          </button>
+        </p>        
+      </div>
+    </div>
+    <div class="modal fade" id="newPlayer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form role="form" name="formAddUser" ng-submit="newPlayer()">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Add a new player</h4>
+            </div>          
+            <div class="modal-body row">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">    
+                <div class="form-group" ng-class="{error: myForm.name.$invalid}">
+                    <label for="username">Player name:</label>
+                    <input type="text" name="name" class="form-control" ng-model="player.name" required placeholder="Player name"/>
+                </div>
+                <div class="form-group">
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" name="optionsRadios" ng-model="player.gender" value="male" checked="checked">Male
+                      </label>
+                    </div>
+                    <div class="radio-inline">
+                      <label>
+                        <input type="radio" name="optionsRadios" ng-model="player.gender" value="female">Female
+                      </label>
+                    </div>
+                </div>
+              </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+            </div>          
+            <div class="modal-footer" style="display:none">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" ng-disabled="formAddUser.$invalid">Create</button>
             </div>
-        </div>
-        <div data-role="footer" data-position="fixed">
-            <h4><a href="#newPlayer" id="addPlayer" data-role="button" data-icon="plus">Add Player</a></h4>
-        </div>
-    </div>
-    <div id="error" data-overlay-theme="c">
-        <div data-role="header" data-position="fixed">
-            <h1>Error</h1>
-        </div>
-        <div data-role="content" id="error-message"></div>
-    </div>
+          </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script data-main="js/config" src="js/libs/vendor/require/require.min.js"></script>
 </body>
 </html>
